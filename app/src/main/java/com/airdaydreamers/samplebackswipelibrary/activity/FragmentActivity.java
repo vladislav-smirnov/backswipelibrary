@@ -2,13 +2,13 @@ package com.airdaydreamers.samplebackswipelibrary.activity;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.airdaydreamers.backswipelibrary.listeners.OnFragmentChangeListener;
 import com.airdaydreamers.samplebackswipelibrary.R;
 import com.airdaydreamers.samplebackswipelibrary.fragment.FirstFragment;
 
-public class FragmentActivity extends android.support.v4.app.FragmentActivity implements OnFragmentChangeListener {
+public class FragmentActivity extends androidx.fragment.app.FragmentActivity implements OnFragmentChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

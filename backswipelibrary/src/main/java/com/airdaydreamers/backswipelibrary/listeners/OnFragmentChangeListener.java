@@ -12,7 +12,7 @@
  */
 package com.airdaydreamers.backswipelibrary.listeners;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /*
   Created by Vladislav Smirnov on 5/4/2018.

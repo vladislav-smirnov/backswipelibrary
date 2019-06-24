@@ -12,7 +12,7 @@
  */
 package com.airdaydreamers.backswipelibrary;
 
-import android.support.v4.widget.ViewDragHelper;
+import androidx.customview.widget.ViewDragHelper;
 
 /*
   Created by Vladislav Smirnov on 4/25/2018.
