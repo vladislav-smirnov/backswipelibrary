@@ -14,10 +14,12 @@ package com.airdaydreamers.backswipelibrary.activity;
 
 import android.app.Activity;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.customview.widget.ViewDragHelper;
+
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,8 +33,11 @@ import android.widget.ScrollView;
 
 import com.airdaydreamers.backswipelibrary.BackSwipeHelper;
 import com.airdaydreamers.backswipelibrary.listeners.OnActivityChangeListener;
+import com.airdaydreamers.backswipelibrary.listeners.OnBackSwipeListener;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.airdaydreamers.backswipelibrary.BackSwipeHelper.*;
 
@@ -43,36 +48,37 @@ import static com.airdaydreamers.backswipelibrary.BackSwipeHelper.*;
 public class BackSwipeViewGroup extends ViewGroup {
     private final String TAG = BackSwipeHelper.TAG + "-" + this.getClass().getSimpleName();
 
-    Context mContext;
+    private Context mContext;
 
-    private EdgeOrientation mEdgeOrientation = EdgeOrientation.LEFT;
+    protected EdgeOrientation mEdgeOrientation = EdgeOrientation.LEFT;
 
-    private boolean mEnabledBackSwipeGestures = true;
+    protected boolean mEnabledBackSwipeGestures = true;
 
-    private double mAutoFinishedVelocityThreshold = 1500.0;
+    protected double mAutoFinishedVelocityThreshold = 1500.0;
     //private static final float BACK_FACTOR = 0.5f;
 
-    private final ViewDragHelper mViewDragHelper;
+    protected ViewDragHelper mViewDragHelper;
 
     private View mTargetView;
     private View mScrollChildView;
 
-    private int mHorizontalDragRange = 1;
-    private int mDraggingState = 0;
-    private int mDraggingOffset;
-
-
+    protected int mHorizontalDragRange = 1;
+    protected int mDraggingState = 0;
+    protected int mDraggingOffset;
 
     /**
      * The threshold of calling finish Activity.
      */
-    private float mTouchSlopThreshold = 0;
-    private float mTouchSlopThresholdInPercent = 0;
-    private float mDraggingOffsetInPercent;
+    protected float mTouchSlopThreshold = 0;
+    protected float mTouchSlopThresholdInPercent = 0;
+    protected float mDraggingOffsetInPercent;
 
-    private boolean isPercentEnabled = false;
-
-    private OnActivityChangeListener mOnActivityChangeListener;
+    protected boolean isPercentEnabled = false;
+    /**
+     * The set of listeners to be sent events through.
+     */
+    protected List<OnBackSwipeListener> mListeners;
+    protected OnActivityChangeListener mOnActivityChangeListener;
 
 
     public BackSwipeViewGroup(Context context) {
@@ -93,10 +99,15 @@ public class BackSwipeViewGroup extends ViewGroup {
     public double getAutoFinishedVelocityThreshold() {
         return mAutoFinishedVelocityThreshold;
     }
+
     public void setEdgeOrientation(EdgeOrientation edgeOrientation) {
         this.mEdgeOrientation = edgeOrientation;
 
         mViewDragHelper.setEdgeTrackingEnabled(edgeOrientation.getValue());
+    }
+
+    public EdgeOrientation getEdgeOrientation() {
+        return mEdgeOrientation;
     }
 
     public void setEdgeSizeLevel(EdgeSizeLevel edgeSizeLevel) {
@@ -120,8 +131,12 @@ public class BackSwipeViewGroup extends ViewGroup {
         }
     }
 
-    public void setEnabledBackSwipeGestures(boolean enable) {
+    public void setEnabledBackSwipeGesture(boolean enable) {
         mEnabledBackSwipeGestures = enable;
+    }
+
+    public boolean getEnabledBackSwipeGesture() {
+        return mEnabledBackSwipeGestures;
     }
 
     public void setScrollChildView(View view) {
@@ -154,7 +169,31 @@ public class BackSwipeViewGroup extends ViewGroup {
         mOnActivityChangeListener = listener;
     }
 
-    private void ensureTarget() {
+    /**
+     * Add a callback to be invoked when a swipe event is sent to this view.
+     *
+     * @param listener the swipe listener to attach to this view
+     */
+    public void addSwipeListener(OnBackSwipeListener listener) {
+        if (mListeners == null) {
+            mListeners = new ArrayList<>();
+        }
+        mListeners.add(listener);
+    }
+
+    /**
+     * Removes a listener from the set of listeners
+     *
+     * @param listener
+     */
+    public void removeSwipeListener(OnBackSwipeListener listener) {
+        if (mListeners == null) {
+            return;
+        }
+        mListeners.remove(listener);
+    }
+
+    protected void ensureTarget() {
         if (mTargetView == null) {
             if (getChildCount() > 1) {
                 IllegalStateException ex = new IllegalStateException("BackSwipeView must contains only one direct child");
@@ -229,7 +268,7 @@ public class BackSwipeViewGroup extends ViewGroup {
         mTouchSlopThreshold = mTouchSlopThreshold > 0 ? mTouchSlopThreshold : mHorizontalDragRange * 0.5f;
         mTouchSlopThresholdInPercent = mTouchSlopThresholdInPercent > 0 ? mTouchSlopThresholdInPercent : 0.5f;
 
-        if (mTouchSlopThresholdInPercent >0)
+        if (mTouchSlopThresholdInPercent > 0)
             isPercentEnabled = true;
     }
 
@@ -257,11 +296,11 @@ public class BackSwipeViewGroup extends ViewGroup {
         }
     }
 
-    private boolean canChildScrollRight() {
+    protected boolean canChildScrollRight() {
         return mScrollChildView.canScrollHorizontally(-1);
     }
 
-    private boolean canChildScrollLeft() {
+    protected boolean canChildScrollLeft() {
         return mScrollChildView.canScrollHorizontally(1);
     }
 
@@ -271,7 +310,25 @@ public class BackSwipeViewGroup extends ViewGroup {
         act.overridePendingTransition(0, android.R.anim.fade_out);
     }
 
-    private class ViewDragHelperCallBack extends ViewDragHelper.Callback {
+    protected boolean closeByVelocity(float xvel) {
+        Log.d(TAG, "xvel == " + xvel);
+        if (xvel > 0 && mEdgeOrientation == EdgeOrientation.LEFT && Math.abs(xvel) > mAutoFinishedVelocityThreshold) {
+            return mEdgeOrientation == EdgeOrientation.LEFT ? !canChildScrollLeft() : !canChildScrollRight();
+
+        } else if (xvel < 0 && mEdgeOrientation == EdgeOrientation.RIGHT && Math.abs(xvel) > mAutoFinishedVelocityThreshold) {
+            return mEdgeOrientation == EdgeOrientation.RIGHT ? !canChildScrollLeft() : !canChildScrollRight();
+        }
+        return false;
+    }
+
+    protected void smoothSlideViewTo(int finalLeft, View view) {
+        Log.d(TAG, "finalLeft == " + finalLeft + "width =" + getWidth());
+        if (mViewDragHelper.settleCapturedViewAt(finalLeft, 0)) {
+            ViewCompat.postInvalidateOnAnimation(view);
+        }
+    }
+
+    public class ViewDragHelperCallBack extends ViewDragHelper.Callback {
 
         @Override
         public boolean tryCaptureView(@NonNull View child, int pointerId) {
@@ -348,12 +405,6 @@ public class BackSwipeViewGroup extends ViewGroup {
             else
                 isBackSwipe = mDraggingOffset >= mTouchSlopThreshold;
 
-//            else if ((isPercentEnabled && mDraggingOffsetInPercent >= mTouchSlopThresholdInPercent) || (mDraggingOffset >= mTouchSlopThreshold)) {
-//                isBackSwipe = true;
-//            } else if ((isPercentEnabled && mDraggingOffsetInPercent < mTouchSlopThresholdInPercent) || (mDraggingOffset < mTouchSlopThreshold)) {
-//                isBackSwipe = false;
-//            }
-
             int finalLeft = 0;
 
 
@@ -362,37 +413,7 @@ public class BackSwipeViewGroup extends ViewGroup {
             } else if (mEdgeOrientation == EdgeOrientation.RIGHT) {
                 finalLeft = isBackSwipe ? -mHorizontalDragRange : 0;
             }
-            smoothSlideViewTo(finalLeft);
-//            Log.d(TAG, "mHorizontalDragRange == " +mHorizontalDragRange);
-//            switch (mEdgeOrientation) {
-//                case LEFT:
-//                    finalLeft = isBackSwipe ? mHorizontalDragRange : 0;
-//                    smoothSlideViewTo(finalLeft);
-//                    break;
-//                case RIGHT:
-//                    finalLeft = isBackSwipe ? -mHorizontalDragRange : 0;
-//                    smoothSlideViewTo(finalLeft);
-//                    break;
-//            }
-
-        }
-    }
-
-    private boolean closeByVelocity(float xvel) {
-        Log.d(TAG, "xvel == " +xvel);
-        if (xvel > 0 && mEdgeOrientation == EdgeOrientation.LEFT && Math.abs(xvel) > mAutoFinishedVelocityThreshold) {
-            return mEdgeOrientation == EdgeOrientation.LEFT ? !canChildScrollLeft() : !canChildScrollRight();
-
-        } else if (xvel < 0 && mEdgeOrientation == EdgeOrientation.RIGHT && Math.abs(xvel) > mAutoFinishedVelocityThreshold) {
-            return mEdgeOrientation == EdgeOrientation.RIGHT ? !canChildScrollLeft() : !canChildScrollRight();
-        }
-        return false;
-    }
-
-    private void smoothSlideViewTo(int finalLeft) {
-        Log.d(TAG, "finalLeft == " +finalLeft + "width =" +getWidth());
-        if (mViewDragHelper.settleCapturedViewAt(finalLeft, 0)) {
-            ViewCompat.postInvalidateOnAnimation(BackSwipeViewGroup.this);
+            smoothSlideViewTo(finalLeft, BackSwipeViewGroup.this);
         }
     }
 }

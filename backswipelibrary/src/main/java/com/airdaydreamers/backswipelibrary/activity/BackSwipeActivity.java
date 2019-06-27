@@ -53,7 +53,7 @@ public class BackSwipeActivity extends AppCompatActivity implements OnActivityCh
     }
 
     public void setEnableSwipe(boolean enableSwipe) {
-        mBackSwipeViewGroup.setEnabledBackSwipeGestures(enableSwipe);
+        mBackSwipeViewGroup.setEnabledBackSwipeGesture(enableSwipe);
     }
 
     public void setEdgeOrientation(BackSwipeHelper.EdgeOrientation edgeOrientation) {

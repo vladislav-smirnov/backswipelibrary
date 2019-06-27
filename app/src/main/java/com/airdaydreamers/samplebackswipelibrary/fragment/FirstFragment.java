@@ -2,7 +2,9 @@ package com.airdaydreamers.samplebackswipelibrary.fragment;
 
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,7 @@ public class FirstFragment extends BackSwipeFragment {
         // Required empty public constructor
     }
 
-    public static FirstFragment newInstance()
-    {
+    public static FirstFragment newInstance() {
         Bundle args = new Bundle();
 
         FirstFragment fragment = new FirstFragment();
@@ -48,7 +49,7 @@ public class FirstFragment extends BackSwipeFragment {
             }
         });
 
-       // return attachToSwipeBack(view, SwipeBackLayout.EdgeSizeLevel.MED);
+        // return attachToSwipeBack(view, SwipeBackLayout.EdgeSizeLevel.MED);
         return attachToBackSwipe(view, BackSwipeHelper.EdgeSizeLevel.MIN);
     }
 

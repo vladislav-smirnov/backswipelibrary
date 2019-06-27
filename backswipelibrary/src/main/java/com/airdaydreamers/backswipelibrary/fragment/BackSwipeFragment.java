@@ -18,12 +18,14 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +48,8 @@ public class BackSwipeFragment extends Fragment {
 
     protected OnFragmentChangeListener mAddFragmentListener;
 
-    private static final String BACKSWIPEFRAGMENT_STATE_HIDDEN = "BACKSWIPEFRAGMENT_STATE_HIDDEN";
-    private BackSwipeLayout mBackSwipeLayout;
+    private static final String BACK_SWIPE_FRAGMENT_STATE_HIDDEN = "BACK_SWIPE_FRAGMENT_STATE_HIDDEN";
+    private BackSwipeLayoutView mBackSwipeLayout;
     private Animation mNoAnim;
     boolean mLocking = false;
 
@@ -72,7 +74,7 @@ public class BackSwipeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            boolean isSupportHidden = savedInstanceState.getBoolean(BACKSWIPEFRAGMENT_STATE_HIDDEN);
+            boolean isSupportHidden = savedInstanceState.getBoolean(BACK_SWIPE_FRAGMENT_STATE_HIDDEN);
 
             if (getFragmentManager() != null) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -92,7 +94,7 @@ public class BackSwipeFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(BACKSWIPEFRAGMENT_STATE_HIDDEN, isHidden());
+        outState.putBoolean(BACK_SWIPE_FRAGMENT_STATE_HIDDEN, isHidden());
     }
 
     @Override
@@ -112,7 +114,7 @@ public class BackSwipeFragment extends Fragment {
     }
 
     private void onFragmentCreate() {
-        mBackSwipeLayout = new BackSwipeLayout(getActivity());
+        mBackSwipeLayout = new BackSwipeLayoutView(getActivity());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mBackSwipeLayout.setLayoutParams(params);
         mBackSwipeLayout.setBackgroundColor(Color.TRANSPARENT);
@@ -128,14 +130,6 @@ public class BackSwipeFragment extends Fragment {
         mBackSwipeLayout.setEdgeSizeLevel(edgeSizeLevel);
         return mBackSwipeLayout;
     }
-
-//    protected void setEdgeLevel(BackSwipeHelper.EdgeSizeLevel edgeSizeLevel) {
-//        mBackSwipeLayout.setEdgeSizeLevel(edgeSizeLevel);
-//    }
-
-//    protected void setEdgeLevel(int widthPixel) {
-//        mBackSwipeLayout.setEdgeLevel(widthPixel);
-//    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -157,8 +151,8 @@ public class BackSwipeFragment extends Fragment {
     }
 
     private void initFragmentBackground(View view) {
-        if (view instanceof BackSwipeLayout) {
-            View childView = ((BackSwipeLayout) view).getChildAt(0);
+        if (view instanceof BackSwipeLayoutView) {
+            View childView = ((BackSwipeLayoutView) view).getChildAt(0);
             setBackground(childView);
         } else {
             setBackground(view);
@@ -220,16 +214,16 @@ public class BackSwipeFragment extends Fragment {
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
-    public BackSwipeLayout getBackSwipeLayout() {
+    public BackSwipeLayoutView getBackSwipeLayout() {
         return mBackSwipeLayout;
     }
 
     public void setEnableBackSwipeGesture(boolean enable) {
-        mBackSwipeLayout.setEnableBackSwipeGesture(enable);
+        mBackSwipeLayout.setEnabledBackSwipeGesture(enable);
     }
 
     public boolean getEnableBackSwipeGesture() {
-        return mBackSwipeLayout.getEnableBackSwipeGesture();
+        return mBackSwipeLayout.getEnabledBackSwipeGesture();
     }
 
     public void setEdgeOrientation(BackSwipeHelper.EdgeOrientation edgeOrientation) {

@@ -3,16 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FirstFragment"
-    >
+    tools:context=".fragment.FirstFragment">
     <!--android:background="@color/colorAccent"-->
 
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
-        android:id="@+id/tv_btn"/>
+        android:text="@string/text_for_first_fragment" />
 
 </FrameLayout>
