@@ -3,6 +3,9 @@ package com.airdaydreamers.samplebackswipelibrary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.airdaydreamers.backswipelibrary.BackSwipeHelper;
 import com.airdaydreamers.backswipelibrary.activity.BackSwipeActivity;
@@ -20,6 +23,15 @@ public class MainActivity extends BackSwipeActivity implements View.OnClickListe
         findViewById(R.id.buttonFirst).setOnClickListener(this);
         findViewById(R.id.buttonSecond).setOnClickListener(this);
         findViewById(R.id.buttonFragmentActivity).setOnClickListener(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        TextView textView = toolbar.findViewById(R.id.textToolbar);
+        textView.setText(getString(R.string.backswipelibraryApp_name));
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //implementation
         setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);

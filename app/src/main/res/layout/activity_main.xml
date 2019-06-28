@@ -9,9 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/holo_blue_dark"
-        android:minHeight="?attr/actionBarSize" />
+        android:minHeight="?attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/textToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|left"
+            android:textSize="22sp" />
+    </androidx.appcompat.widget.Toolbar>
     <!--<HorizontalScrollView-->
-        <!--android:layout_width="match_parent"-->
+    <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:id="@+id/scrollID">-->
         <!--<LinearLayout-->

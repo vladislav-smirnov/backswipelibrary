@@ -6,5 +6,6 @@
     <string name="text_for_second_fragment">This is the second fragment</string>
     <string name="text_for_first_fragment">This is the first fragment. Click on  this text.</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
-    <string name="backswipelibraryFirst_activity">first activity</string>
+    <string name="backswipelibraryFirst_activity">The first activity</string>
+    <string name="backswipelibrarySecond_activity">The second activity</string>
 </resources>
