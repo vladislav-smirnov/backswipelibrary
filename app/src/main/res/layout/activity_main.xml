@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -72,20 +71,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/buttonFirst"
-                android:onClick="onClick"
-                android:text="First"/>
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="First" />
+
+            <Button
                 android:id="@+id/buttonSecond"
-                android:onClick="onClick"
-                android:text="Second"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Second" />
+
+            <Button
+                android:id="@+id/buttonFragmentActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fragment Activity" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

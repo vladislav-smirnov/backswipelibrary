@@ -26,7 +26,32 @@ public class BackSwipeHelper {
      * Edge size enum indicating that which size should be applied for detect gesture.
      */
     public enum EdgeSizeLevel {
-        MAX, MIN, MED
+        MIN(0),
+        MED(1),
+        MAX(2);
+
+        EdgeSizeLevel(int i) {
+            this.value = i;
+        }
+
+        private int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        public static EdgeSizeLevel convertEdgeSizeLevel(int value) {
+            switch (value) {
+                case 0:
+                    return MIN;
+                case 1:
+                    return MED;
+                case 2:
+                    return MAX;
+
+            }
+            return MAX;
+        }
     }
 
     /**
@@ -48,8 +73,23 @@ public class BackSwipeHelper {
         public int getValue() {
             return type;
         }
-    }
 
+        public static EdgeOrientation convertEdgeOrientation(int value) {
+            switch (value) {
+                case ViewDragHelper.EDGE_LEFT | ViewDragHelper.EDGE_RIGHT:
+                    return ALL;
+                case ViewDragHelper.EDGE_LEFT:
+                    return LEFT;
+                case ViewDragHelper.EDGE_TOP:
+                    return TOP;
+                case ViewDragHelper.EDGE_RIGHT:
+                    return RIGHT;
+                case ViewDragHelper.EDGE_BOTTOM:
+                    return BOTTOM;
+            }
+            return LEFT;
+        }
+    }
     //region States of ViewDragHelper
     /**
      * A view is not currently being dragged or animating as a result of a

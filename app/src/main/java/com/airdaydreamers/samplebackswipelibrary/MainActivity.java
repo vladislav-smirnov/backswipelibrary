@@ -8,14 +8,20 @@ import com.airdaydreamers.backswipelibrary.BackSwipeHelper;
 import com.airdaydreamers.backswipelibrary.activity.BackSwipeActivity;
 import com.airdaydreamers.samplebackswipelibrary.activity.FirstActivity;
 import com.airdaydreamers.samplebackswipelibrary.activity.FragmentActivity;
+import com.airdaydreamers.samplebackswipelibrary.activity.SecondActivity;
 
-public class MainActivity extends BackSwipeActivity {
+public class MainActivity extends BackSwipeActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.buttonFirst).setOnClickListener(this);
+        findViewById(R.id.buttonSecond).setOnClickListener(this);
+        findViewById(R.id.buttonFragmentActivity).setOnClickListener(this);
+
+        //implementation
         setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
         setEdgeSizeLevel(BackSwipeHelper.EdgeSizeLevel.MED);
         setEnableSwipe(true);
@@ -25,15 +31,21 @@ public class MainActivity extends BackSwipeActivity {
         //setEnableSwipe(false);
     }
 
-    public void onClick(View view) {
-        switch (view.getId()) {
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.buttonFirst:
                 Intent intent = new Intent(this, FirstActivity.class);
                 startActivity(intent);
                 break;
-            case  R.id.buttonSecond:
-                Intent intent2 = new Intent(this, FragmentActivity.class);
+            case R.id.buttonSecond:
+                Intent intent2 = new Intent(this, SecondActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.buttonFragmentActivity:
+                Intent intentFragment = new Intent(this, FragmentActivity.class);
+                startActivity(intentFragment);
                 break;
         }
     }

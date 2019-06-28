@@ -20,6 +20,10 @@ import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.customview.widget.ViewDragHelper;
 
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,6 +36,7 @@ import android.widget.AbsListView;
 import android.widget.ScrollView;
 
 import com.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import com.airdaydreamers.backswipelibrary.R;
 import com.airdaydreamers.backswipelibrary.listeners.OnActivityChangeListener;
 import com.airdaydreamers.backswipelibrary.listeners.OnBackSwipeListener;
 
@@ -51,6 +56,9 @@ public class BackSwipeViewGroup extends ViewGroup {
     private Context mContext;
 
     protected EdgeOrientation mEdgeOrientation = EdgeOrientation.LEFT;
+
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+    private int mBackgroundColor = DEFAULT_BACKGROUND_COLOR;
 
     protected boolean mEnabledBackSwipeGestures = true;
 
@@ -90,6 +98,22 @@ public class BackSwipeViewGroup extends ViewGroup {
         super(context, attrs);
         this.mContext = context;
         mViewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack());
+        init(context, attrs);
+    }
+
+    protected void init(Context context, AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BackSwipeViewGroup, 0, 0);
+            try {
+                mEnabledBackSwipeGestures = array.getBoolean(R.styleable.BackSwipeViewGroup_enableSwipe, true);
+                mTouchSlopThreshold = array.getFloat(R.styleable.BackSwipeViewGroup_touchSlopThreshold, 500.0f);
+                mEdgeOrientation = EdgeOrientation.convertEdgeOrientation(array.getInteger(R.styleable.BackSwipeViewGroup_edgeOrientation, EdgeOrientation.LEFT.getValue()));
+                setEdgeSizeLevel(EdgeSizeLevel.convertEdgeSizeLevel(array.getInteger(R.styleable.BackSwipeViewGroup_edgeSizeLevel, EdgeSizeLevel.MIN.getValue())));
+                mBackgroundColor = array.getColor(R.styleable.BackSwipeViewGroup_backgroundColor, Color.WHITE);
+            } finally {
+                array.recycle();
+            }
+        }
     }
 
     public void setAutoFinishedVelocityThreshold(double velocity) {
@@ -101,7 +125,7 @@ public class BackSwipeViewGroup extends ViewGroup {
     }
 
     public void setEdgeOrientation(EdgeOrientation edgeOrientation) {
-        this.mEdgeOrientation = edgeOrientation;
+        mEdgeOrientation = edgeOrientation;
 
         mViewDragHelper.setEdgeTrackingEnabled(edgeOrientation.getValue());
     }
@@ -164,6 +188,13 @@ public class BackSwipeViewGroup extends ViewGroup {
         return mTouchSlopThresholdInPercent;
     }
 
+    public void setColorForBackground(int color) {
+        mBackgroundColor = color;
+    }
+
+    public int getBackgroundColor() {
+        return mBackgroundColor;
+    }
 
     public void setOnSwipeBackListener(OnActivityChangeListener listener) {
         mOnActivityChangeListener = listener;
@@ -236,6 +267,15 @@ public class BackSwipeViewGroup extends ViewGroup {
         if (getChildCount() == 0) return;
 
         View child = getChildAt(0);
+
+        Drawable background = child.getBackground();
+        if (background != null) {
+            if (background instanceof ColorDrawable) {
+                mBackgroundColor = ((ColorDrawable) background).getColor();
+            }
+        }
+
+        child.setBackgroundColor(mBackgroundColor);
 
         int childWidth = width - getPaddingLeft() - getPaddingRight();
         int childHeight = height - getPaddingTop() - getPaddingBottom();

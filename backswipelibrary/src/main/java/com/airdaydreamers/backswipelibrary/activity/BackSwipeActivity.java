@@ -13,7 +13,11 @@
 package com.airdaydreamers.backswipelibrary.activity;
 
 import android.graphics.Color;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,6 +38,18 @@ public class BackSwipeActivity extends AppCompatActivity implements OnActivityCh
     public void setContentView(int layoutResID) {
         super.setContentView(getContainer());
         View view = LayoutInflater.from(this).inflate(layoutResID, null);
+
+        Drawable background = view.getBackground();
+        if (background == null) {
+            view.setBackgroundColor(mBackSwipeViewGroup.getBackgroundColor());
+        } else {
+            int color = Color.WHITE;
+            if (background instanceof ColorDrawable) {
+                color = ((ColorDrawable) background).getColor();
+            }
+            mBackSwipeViewGroup.setColorForBackground(color);
+        }
+
         mBackSwipeViewGroup.addView(view);
     }
 
@@ -69,15 +85,24 @@ public class BackSwipeActivity extends AppCompatActivity implements OnActivityCh
         mBackSwipeViewGroup.setTouchSlopThreshold(touchSlopThreshold);
     }
 
-    public void setScrollChildView(View view)
-    {
+    public void setScrollChildView(View view) {
         mBackSwipeViewGroup.setScrollChildView(view);
     }
-    public void setTouchSlopThreshold(int threshold){
+
+    public void setTouchSlopThreshold(int threshold) {
         mBackSwipeViewGroup.setTouchSlopThreshold(threshold);
     }
-    public float getTouchSlopThreshold(){
+
+    public float getTouchSlopThreshold() {
         return mBackSwipeViewGroup.getTouchSlopThreshold();
+    }
+
+    public void setBackgroundColor(int color) {
+        mBackSwipeViewGroup.setColorForBackground(color);
+    }
+
+    public int getBackgroundColor() {
+        return mBackSwipeViewGroup.getBackgroundColor();
     }
 
     public BackSwipeViewGroup getBackSwipeViewGroup() {
