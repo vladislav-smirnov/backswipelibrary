@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="BackSwipeViewGroup">
-        <attr name="backgroundColor" format="color" />
+    <declare-styleable name="bsl_BackSwipeViewGroup">
+        <attr name="bsl_backgroundColor" format="color" />
 
-        <attr name="edgeOrientation" format="enum">
+        <attr name="bsl_edgeOrientation" format="enum">
             <enum name="all" value="3" />
             <enum name="left" value="1" />
             <enum name="right" value="2" />
         </attr>
-        <attr name="edgeSizeLevel" format="enum">
+        <attr name="bsl_edgeSizeLevel" format="enum">
             <enum name="min" value="0" />
             <enum name="med" value="1" />
             <enum name="max" value="2" />
         </attr>
-        <attr name="enableSwipe" format="boolean" />
-        <attr name="touchSlopThreshold" format="float" />
+        <attr name="bsl_enableSwipe" format="boolean" />
+        <attr name="bsl_touchSlopThreshold" format="float" />
     </declare-styleable>
 </resources>

@@ -31,7 +31,7 @@ public class FragmentActivity extends androidx.fragment.app.FragmentActivity imp
 
     private void addFragment(Fragment fromFragment, Fragment toFragment) {
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.anim_fragment_enter, R.anim.anim_fragment_exit, R.anim.anim_fragment_pop_enter, R.anim.anim_fragment_pop_exit)
+                .setCustomAnimations(R.anim.bsl_anim_fragment_enter, R.anim.bsl_anim_fragment_exit, R.anim.bsl_anim_fragment_pop_enter, R.anim.bsl_anim_fragment_pop_exit)
                 .add(R.id.frameId, toFragment, toFragment.getClass().getSimpleName())
                 .hide(fromFragment)
                 .addToBackStack(toFragment.getClass().getSimpleName())

@@ -103,13 +103,13 @@ public class BackSwipeViewGroup extends ViewGroup {
 
     protected void init(Context context, AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BackSwipeViewGroup, 0, 0);
+            TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.bsl_BackSwipeViewGroup, 0, 0);
             try {
-                mEnabledBackSwipeGestures = array.getBoolean(R.styleable.BackSwipeViewGroup_enableSwipe, true);
-                mTouchSlopThreshold = array.getFloat(R.styleable.BackSwipeViewGroup_touchSlopThreshold, 500.0f);
-                mEdgeOrientation = EdgeOrientation.convertEdgeOrientation(array.getInteger(R.styleable.BackSwipeViewGroup_edgeOrientation, EdgeOrientation.LEFT.getValue()));
-                setEdgeSizeLevel(EdgeSizeLevel.convertEdgeSizeLevel(array.getInteger(R.styleable.BackSwipeViewGroup_edgeSizeLevel, EdgeSizeLevel.MIN.getValue())));
-                mBackgroundColor = array.getColor(R.styleable.BackSwipeViewGroup_backgroundColor, Color.WHITE);
+                mEnabledBackSwipeGestures = array.getBoolean(R.styleable.bsl_BackSwipeViewGroup_bsl_enableSwipe, true);
+                mTouchSlopThreshold = array.getFloat(R.styleable.bsl_BackSwipeViewGroup_bsl_touchSlopThreshold, 500.0f);
+                mEdgeOrientation = EdgeOrientation.convertEdgeOrientation(array.getInteger(R.styleable.bsl_BackSwipeViewGroup_bsl_edgeOrientation, EdgeOrientation.LEFT.getValue()));
+                setEdgeSizeLevel(EdgeSizeLevel.convertEdgeSizeLevel(array.getInteger(R.styleable.bsl_BackSwipeViewGroup_bsl_edgeSizeLevel, EdgeSizeLevel.MIN.getValue())));
+                mBackgroundColor = array.getColor(R.styleable.bsl_BackSwipeViewGroup_bsl_backgroundColor, Color.WHITE);
             } finally {
                 array.recycle();
             }

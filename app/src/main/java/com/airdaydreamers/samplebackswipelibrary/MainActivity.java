@@ -29,7 +29,7 @@ public class MainActivity extends BackSwipeActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         TextView textView = toolbar.findViewById(R.id.textToolbar);
-        textView.setText(getString(R.string.backswipelibraryApp_name));
+        textView.setText(getString(R.string.bsl_App_name));
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 

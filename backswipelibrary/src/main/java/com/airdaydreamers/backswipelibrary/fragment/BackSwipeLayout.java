@@ -102,7 +102,7 @@ class BackSwipeLayout extends FrameLayout {
 
     private void init() {
         mViewDragHelper = ViewDragHelper.create(this, new ViewDragCallback());
-        setShadow(R.drawable.shadow_left, EdgeOrientation.LEFT);
+        setShadow(R.drawable.bsl_shadow_left, EdgeOrientation.LEFT);
         setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
     }
 
@@ -154,7 +154,7 @@ class BackSwipeLayout extends FrameLayout {
         mViewDragHelper.setEdgeTrackingEnabled(edgeOrientation.getValue());
 
         if (edgeOrientation == EdgeOrientation.RIGHT || edgeOrientation == EdgeOrientation.ALL) {
-            setShadow(R.drawable.shadow_right, EdgeOrientation.RIGHT);
+            setShadow(R.drawable.bsl_shadow_right, EdgeOrientation.RIGHT);
         }
     }
 

@@ -87,7 +87,7 @@ public class BackSwipeFragment extends Fragment {
             }
         }
 
-        mNoAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.no_anim);
+        mNoAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.bsl_no_anim);
         onFragmentCreate();
     }
 

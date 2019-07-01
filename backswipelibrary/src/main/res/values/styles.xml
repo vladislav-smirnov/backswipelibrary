@@ -1,13 +1,13 @@
 <resources>
 
-    <style name="Theme.Back.Swipe" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="bsl_Theme.Back.Swipe" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="Theme.Back.Swipe.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="bsl_Theme.Back.Swipe.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="colorPrimary">#3F51B5</item>
