@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/bsl_Theme.Back.Swipe.ActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name="io.github.airdaydreamers.samplebackswipelibrary.MainActivity"
             android:theme="@style/bsl_Theme.Back.Swipe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.FirstActivity"
+            android:name="io.github.airdaydreamers.samplebackswipelibrary.activity.FirstActivity"
             android:theme="@style/bsl_Theme.Back.Swipe.ActionBar" />
-        <activity android:name=".activity.SecondActivity" />
+        <activity android:name="io.github.airdaydreamers.samplebackswipelibrary.activity.SecondActivity" />
         <activity
-            android:name=".activity.FragmentActivity"
+            android:name="io.github.airdaydreamers.samplebackswipelibrary.activity.FragmentActivity"
             android:theme="@style/bsl_Theme.Back.Swipe.ActionBar" />
     </application>
 

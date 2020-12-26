@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.airdaydreamers.backswipelibrary">
-    <application android:allowBackup="true"></application>
+    package="io.github.airdaydreamers.backswipelibrary">
+
+    <application android:allowBackup="true" />
 </manifest>

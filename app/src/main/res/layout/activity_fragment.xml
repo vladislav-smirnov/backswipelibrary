@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FragmentActivity">
+    tools:context="io.github.airdaydreamers.samplebackswipelibrary.activity.FragmentActivity">
 
     <FrameLayout
         android:id="@+id/frameId"
