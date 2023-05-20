@@ -10,40 +10,37 @@
  * by patent grant or registration of a utility model or design, are reserved.
  *
  */
-package io.github.airdaydreamers.backswipelibrary.listeners;
-
+package io.github.airdaydreamers.backswipelibrary.listeners
 /*
   Created by Vladislav Smirnov on 5/4/2018.
   sivdead@gmail.com
- */
-
-/**
+ */ /**
  * Interface definition for a callback to be invoked when any back swipe event is happened.
  */
-public interface OnBackSwipeListener {
+interface OnBackSwipeListener {
     /**
      * Invoke when state change
      *
      * @param state flag to describe scroll state
-     *              //* @see #STATE_IDLE
-     *              //* @see #STATE_DRAGGING
-     *              //* @see #STATE_SETTLING
+     * // * @see #STATE_IDLE
+     * // * @see #STATE_DRAGGING
+     * // * @see #STATE_SETTLING
      */
-    void onDragStateChange(int state);
+    fun onDragStateChange(state: Int)
 
     /**
      * Invoke when edge touched
      *
      * @param oritentationEdgeFlag edge flag describing the edge being touched
-     *                             //* @see #EDGE_LEFT
-     *                             //* @see #EDGE_RIGHT
+     * // * @see #EDGE_LEFT
+     * // * @see #EDGE_RIGHT
      */
-    void onEdgeTouch(int oritentationEdgeFlag);
+    fun onEdgeTouch(oritentationEdgeFlag: Int)
 
     /**
      * Invoke when scroll percent over the threshold for the first time
      *
      * @param scrollPercent scroll percent of this view
      */
-    void onDragScrolled(float scrollPercent);
+    fun onDragScrolled(scrollPercent: Float)
 }

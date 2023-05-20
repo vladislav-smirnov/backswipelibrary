@@ -36,19 +36,19 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
 import io.github.airdaydreamers.backswipelibrary.R;
 import io.github.airdaydreamers.backswipelibrary.listeners.OnBackSwipeListener;
 
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.EdgeOrientation;
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.EdgeSizeLevel;
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.STATE_DRAGGING;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.EdgeOrientation;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.EdgeSizeLevel;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.STATE_DRAGGING;
 
 /**
  * Created by Vladislav Smirnov on 4/24/2018.
  */
 class BackSwipeLayout extends FrameLayout {
-    private final String TAG = BackSwipeHelper.TAG + "-" + this.getClass().getSimpleName();
+    private final String TAG = BackSwipeState.TAG + "-" + this.getClass().getSimpleName();
 
     private static final int DEFAULT_SCRIM_COLOR = 0x99000000;
     private static final int FULL_ALPHA = 255;
@@ -106,7 +106,7 @@ class BackSwipeLayout extends FrameLayout {
     private void init() {
         mViewDragHelper = ViewDragHelper.create(this, new ViewDragCallback());
         setShadow(R.drawable.bsl_shadow_left, EdgeOrientation.LEFT);
-        setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
+        setEdgeOrientation(BackSwipeState.EdgeOrientation.LEFT);
     }
 
     public void setEnableBackSwipeGesture(boolean enable) {

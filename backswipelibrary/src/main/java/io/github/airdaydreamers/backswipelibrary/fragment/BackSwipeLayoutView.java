@@ -13,22 +13,23 @@ import androidx.customview.widget.ViewDragHelper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
+import io.github.airdaydreamers.backswipelibrary.EdgeOrientation;
 import io.github.airdaydreamers.backswipelibrary.activity.BackSwipeViewGroup;
 import io.github.airdaydreamers.backswipelibrary.listeners.OnBackSwipeListener;
 
 import java.util.List;
 
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.STATE_DRAGGING;
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.STATE_IDLE;
-import static io.github.airdaydreamers.backswipelibrary.BackSwipeHelper.STATE_SETTLING;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.STATE_DRAGGING;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.STATE_IDLE;
+import static io.github.airdaydreamers.backswipelibrary.BackSwipeState.STATE_SETTLING;
 
 /**
  * Created by Vladislav Smirnov on 24.06.19.
  * sivdead@gmail.com
  */
 public class BackSwipeLayoutView extends BackSwipeViewGroup {
-    private final String TAG = BackSwipeHelper.TAG + "-" + this.getClass().getSimpleName();
+    private final String TAG = BackSwipeState.TAG + "-" + this.getClass().getSimpleName();
 
     private BackSwipeFragment mFragment;
     private FragmentActivity mActivity;
@@ -80,14 +81,14 @@ public class BackSwipeLayoutView extends BackSwipeViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!mEnabledBackSwipeGestures) return super.onInterceptTouchEvent(ev);
+        if (!enabledBackSwipeGesture) return super.onInterceptTouchEvent(ev);
         ensureTarget();
         return mViewDragHelper.shouldInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!mEnabledBackSwipeGestures) return super.onTouchEvent(event);
+        if (!enabledBackSwipeGesture) return super.onTouchEvent(event);
         mViewDragHelper.processTouchEvent(event);
         return true;
     }
@@ -127,9 +128,9 @@ public class BackSwipeLayoutView extends BackSwipeViewGroup {
             Log.d(TAG, "clampViewPositionHorizontal");
 
             int result = 0;
-            if (mEdgeOrientation == BackSwipeHelper.EdgeOrientation.LEFT) {
+            if (mEdgeOrientation == EdgeOrientation.LEFT) {
                 result = Math.min(child.getWidth(), Math.max(left, 0));
-            } else if (mEdgeOrientation == BackSwipeHelper.EdgeOrientation.RIGHT) {
+            } else if (mEdgeOrientation == EdgeOrientation.RIGHT) {
                 result = Math.min(0, Math.max(left, -child.getWidth()));
             }
             return result;

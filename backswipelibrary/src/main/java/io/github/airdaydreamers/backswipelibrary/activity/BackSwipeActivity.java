@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
 import io.github.airdaydreamers.backswipelibrary.listeners.OnActivityChangeListener;
 
 /**
@@ -56,7 +56,7 @@ public class BackSwipeActivity extends AppCompatActivity implements OnActivityCh
     private View getContainer() {
         RelativeLayout container = new RelativeLayout(this);
         mBackSwipeViewGroup = new BackSwipeViewGroup(this);
-        mBackSwipeViewGroup.setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
+        mBackSwipeViewGroup.setEdgeOrientation(BackSwipeState.EdgeOrientation.LEFT);
         mBackSwipeViewGroup.setOnSwipeBackListener(this);
 
         mImageViewShadow = new ImageView(this);
@@ -72,12 +72,12 @@ public class BackSwipeActivity extends AppCompatActivity implements OnActivityCh
         mBackSwipeViewGroup.setEnabledBackSwipeGesture(enableSwipe);
     }
 
-    public void setEdgeOrientation(BackSwipeHelper.EdgeOrientation edgeOrientation) {
+    public void setEdgeOrientation(BackSwipeState.EdgeOrientation edgeOrientation) {
         mBackSwipeViewGroup.setEdgeOrientation(edgeOrientation);
     }
 
 
-    public void setEdgeSizeLevel(BackSwipeHelper.EdgeSizeLevel level) {
+    public void setEdgeSizeLevel(BackSwipeState.EdgeSizeLevel level) {
         mBackSwipeViewGroup.setEdgeSizeLevel(level);
     }
 

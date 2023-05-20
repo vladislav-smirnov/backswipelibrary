@@ -10,24 +10,23 @@
  * by patent grant or registration of a utility model or design, are reserved.
  *
  */
-package io.github.airdaydreamers.backswipelibrary.listeners;
+package io.github.airdaydreamers.backswipelibrary.listeners
 
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.Fragment
 
 /*
   Created by Vladislav Smirnov on 5/4/2018.
   sivdead@gmail.com
  */
-
 /**
  * Interface definition for a callback to be invoked when a fragment is added.
  */
-public interface OnFragmentChangeListener {
+fun interface OnFragmentChangeListener {
     /**
      * Called when a fragment has been added.
      *
      * @param fromFragment, The fragment that was before.
      * @param toFragment    The fragment that was added for transition.
      */
-    void onFragmentAdded(Fragment fromFragment, Fragment toFragment);
+    fun onFragmentAdded(fromFragment: Fragment, toFragment: Fragment)
 }

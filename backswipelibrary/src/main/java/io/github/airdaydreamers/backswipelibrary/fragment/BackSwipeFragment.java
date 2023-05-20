@@ -32,9 +32,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.lang.reflect.MalformedParameterizedTypeException;
-import java.util.Objects;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
+import io.github.airdaydreamers.backswipelibrary.EdgeSizeLevel;
 import io.github.airdaydreamers.backswipelibrary.R;
 import io.github.airdaydreamers.backswipelibrary.listeners.OnFragmentChangeListener;
 
@@ -43,7 +43,7 @@ import io.github.airdaydreamers.backswipelibrary.listeners.OnFragmentChangeListe
  */
 public class BackSwipeFragment extends Fragment {
 
-    private final String TAG = BackSwipeHelper.TAG + "-" + this.getClass().getSimpleName();
+    private final String TAG = BackSwipeState.TAG + "-" + this.getClass().getSimpleName();
 
     protected OnFragmentChangeListener mAddFragmentListener;
 
@@ -124,7 +124,7 @@ public class BackSwipeFragment extends Fragment {
         return mBackSwipeLayout;
     }
 
-    protected View attachToBackSwipe(View view, BackSwipeHelper.EdgeSizeLevel edgeSizeLevel) {
+    protected View attachToBackSwipe(View view, EdgeSizeLevel edgeSizeLevel) {
         mBackSwipeLayout.attachToFragment(this, view);
         mBackSwipeLayout.setEdgeSizeLevel(edgeSizeLevel);
         return mBackSwipeLayout;
@@ -225,15 +225,15 @@ public class BackSwipeFragment extends Fragment {
         return mBackSwipeLayout.getEnabledBackSwipeGesture();
     }
 
-    public void setEdgeOrientation(BackSwipeHelper.EdgeOrientation edgeOrientation) {
+    public void setEdgeOrientation(BackSwipeState.EdgeOrientation edgeOrientation) {
         mBackSwipeLayout.setEdgeOrientation(edgeOrientation);
     }
 
-    public BackSwipeHelper.EdgeOrientation getEdgeOrientation() {
+    public BackSwipeState.EdgeOrientation getEdgeOrientation() {
         return mBackSwipeLayout.getEdgeOrientation();
     }
 
-    public void setEdgeSizeLevel(BackSwipeHelper.EdgeSizeLevel edgeSizeLevel) {
+    public void setEdgeSizeLevel(BackSwipeState.EdgeSizeLevel edgeSizeLevel) {
         mBackSwipeLayout.setEdgeSizeLevel(edgeSizeLevel);
     }
 

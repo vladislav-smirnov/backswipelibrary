@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
 import io.github.airdaydreamers.backswipelibrary.activity.BackSwipeActivity;
 
 import com.airdaydreamers.samplebackswipelibrary.R;
@@ -37,8 +37,8 @@ public class MainActivity extends BackSwipeActivity implements View.OnClickListe
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //implementation
-        setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
-        setEdgeSizeLevel(BackSwipeHelper.EdgeSizeLevel.MED);
+        setEdgeOrientation(BackSwipeState.EdgeOrientation.LEFT);
+        setEdgeSizeLevel(BackSwipeState.EdgeSizeLevel.MED);
         setEnableSwipe(true);
         //setScrollChildView(findViewById(R.id.scrollID));
         setTouchSlopThreshold(700.2f);

@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import io.github.airdaydreamers.backswipelibrary.BackSwipeHelper;
+import io.github.airdaydreamers.backswipelibrary.BackSwipeState;
+import io.github.airdaydreamers.backswipelibrary.EdgeSizeLevel;
 import io.github.airdaydreamers.backswipelibrary.fragment.BackSwipeFragment;
 import com.airdaydreamers.samplebackswipelibrary.R;
 
@@ -38,7 +39,7 @@ public class FirstFragment extends BackSwipeFragment {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
 
         setFragmentBackground(R.color.colorPrimary);
-        setEdgeOrientation(BackSwipeHelper.EdgeOrientation.LEFT);
+        setEdgeOrientation(BackSwipeState.EdgeOrientation.LEFT);
 
         view.findViewById(R.id.tv_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +51,7 @@ public class FirstFragment extends BackSwipeFragment {
         });
 
         // return attachToSwipeBack(view, SwipeBackLayout.EdgeSizeLevel.MED);
-        return attachToBackSwipe(view, BackSwipeHelper.EdgeSizeLevel.MIN);
+        return attachToBackSwipe(view,  new EdgeSizeLevel.MIN());
     }
 
 }

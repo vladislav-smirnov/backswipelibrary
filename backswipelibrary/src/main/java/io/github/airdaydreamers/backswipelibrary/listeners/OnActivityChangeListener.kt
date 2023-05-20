@@ -10,22 +10,20 @@
  * by patent grant or registration of a utility model or design, are reserved.
  *
  */
-package io.github.airdaydreamers.backswipelibrary.listeners;
-
+package io.github.airdaydreamers.backswipelibrary.listeners
 /*
   Created by Vladislav Smirnov on 5/4/2018.
   sivdead@gmail.com
  */
-
 /**
  * Interface definition for a callback to be invoked when Activity is changed.
  */
-public interface OnActivityChangeListener {
+fun interface OnActivityChangeListener {
     /**
      * Return scrolled fraction of the layout.
      *
      * @param groupThreshold relative to the anchor.
      * @param groupScreen    relative to the screen.
      */
-    void onViewPositionChanged(float groupThreshold, float groupScreen);
+    fun onViewPositionChanged(groupThreshold: Float, groupScreen: Float)
 }
